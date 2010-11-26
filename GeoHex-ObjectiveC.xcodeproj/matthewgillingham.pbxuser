@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* GeoHex_ObjectiveCAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1105, 745}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1105, 489}}";
 			sepNavSelRange = "{138, 0}";
 			sepNavVisRange = "{0, 538}";
 		};
 	};
 	1D3623250D0F684500981E51 /* GeoHex_ObjectiveCAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1027}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1144}}";
 			sepNavSelRange = "{138, 0}";
-			sepNavVisRange = "{0, 2197}";
+			sepNavVisRange = "{0, 1272}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* GeoHex-ObjectiveC */ = {
@@ -22,7 +22,7 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* GeoHex_ObjectiveCViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1105, 745}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1105, 489}}";
 			sepNavSelRange = "{141, 0}";
 			sepNavVisRange = "{0, 382}";
 		};
@@ -30,14 +30,14 @@
 	28D7ACF70DDB3853001CB0EB /* GeoHex_ObjectiveCViewController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1105, 1339}}";
-			sepNavSelRange = "{1566, 0}";
-			sepNavVisRange = "{0, 1057}";
+			sepNavSelRange = "{1014, 0}";
+			sepNavVisRange = "{0, 982}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 54D65644129F7C4E0080FA41 /* GeoHex-ObjectiveC */;
-		activeSDKPreference = iphonesimulator4.2;
+		activeSDKPreference = iphoneos4.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* GeoHex-ObjectiveC */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* GeoHex-ObjectiveC */,
@@ -138,6 +138,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -167,14 +168,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1160, 1690}}";
 			sepNavSelRange = "{37, 0}";
-			sepNavVisRange = "{4425, 1602}";
+			sepNavVisRange = "{4370, 1651}";
 		};
 	};
 	54D65652129F7C6F0080FA41 /* GeoHex.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1105, 7384}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1105, 7319}}";
 			sepNavSelRange = "{36, 0}";
-			sepNavVisRange = "{0, 1230}";
+			sepNavVisRange = "{1524, 1517}";
 		};
 	};
 }

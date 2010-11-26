@@ -60,8 +60,8 @@
 }
 
 +(NSArray *)geoHexListByStepsCenteredAroundGeoHex:(GeoHex *) centralGeoHex withLayers: (int) numberOfLayers {
-	//TODO: What if the user specifies more layers than it possible at the given level? (eg. requesting
-	// 10 layers of GeoHexes at Level 0)  There is current behavior is undefined.
+//TODO: What if the user specifies more layers than it possible at the given level? (eg. requesting
+// 10 layers of GeoHexes at Level 0)  There is current behavior is undefined.
 	
 	NSMutableArray *list = [NSMutableArray arrayWithCapacity:numberOfLayers];
 	MKMapPoint mapPoint;
@@ -297,14 +297,14 @@
 		int h_x_abs = abs(h_x)*2+h_x_p;
 		int h_y_abs = abs(h_y)*2+h_y_p;
 		
-		//		double h_x_100000 = floor(h_x_abs/777600000);
+//		double h_x_100000 = floor(h_x_abs/777600000);
 		double h_x_10000 = floor((h_x_abs%77600000)/1296000);
 		double h_x_1000 = floor((h_x_abs%1296000)/216000);
 		double h_x_100 = floor((h_x_abs%216000)/3600);
 		double h_x_10 = floor((h_x_abs%3600)/60);
 		double h_x_1 = floor((h_x_abs%3600)%60);
 		
-		//		double h_y_100000 = floor(h_y_abs/777600000);
+//		double h_y_100000 = floor(h_y_abs/777600000);
 		double h_y_10000 = floor((h_y_abs%77600000)/1296000);
 		double h_y_1000 = floor((h_y_abs%1296000)/216000);
 		double h_y_100 = floor((h_y_abs%216000)/3600);
@@ -314,10 +314,10 @@
 		NSMutableString *h_code = [NSMutableString stringWithCapacity:10];
 		[h_code	appendString:[self charAtIndex:aLevel%60 ofString:h_key]];
 		
-		//		if (h_max >=77600000 / 2) {
-		//			[h_code appendString:[self charAtIndex:(h_x_100000) ofString:h_key]];
-		//			[h_code appendString:[self charAtIndex:(h_y_100000) ofString:h_key]];
-		//		}
+//		if (h_max >=77600000 / 2) {
+//			[h_code appendString:[self charAtIndex:(h_x_100000) ofString:h_key]];
+//			[h_code appendString:[self charAtIndex:(h_y_100000) ofString:h_key]];
+//		}
 		
 		if (h_max >= 1296000/2) {
 			[h_code appendString:[self charAtIndex:(h_x_10000) ofString:h_key]];
@@ -360,20 +360,20 @@
 		int h_x = 0;
 		int h_y = 0;
 		
-		//		if (h_max >= 777600000 / 2) {
-		//			h_x = [self indexOfChar:[self charAtIndex:1 ofString:code] inString:h_key] * 777600000 + 
-		//					[self indexOfChar:[self charAtIndex:3 ofString:code] inString:h_key] * 12960000 +
-		//					[self indexOfChar:[self charAtIndex:5 ofString:code] inString:h_key] * 216000 + 
-		//					[self indexOfChar:[self charAtIndex:7 ofString:code] inString:h_key] * 3600 +
-		//					[self indexOfChar:[self charAtIndex:9 ofString:code] inString:h_key] * 60 + 
-		//					[self indexOfChar:[self charAtIndex:11 ofString:code] inString:h_key];
-		//			h_y = [self indexOfChar:[self charAtIndex:2 ofString:code] inString:h_key] * 777600000 + 
-		//					[self indexOfChar:[self charAtIndex:4 ofString:code] inString:h_key] * 12960000 +
-		//					[self indexOfChar:[self charAtIndex:6 ofString:code] inString:h_key] * 216000 + 
-		//					[self indexOfChar:[self charAtIndex:8 ofString:code] inString:h_key] * 3600 +
-		//					[self indexOfChar:[self charAtIndex:10 ofString:code] inString:h_key] * 60 + 
-		//					[self indexOfChar:[self charAtIndex:12 ofString:code] inString:h_key];
-		//		} else
+//		if (h_max >= 777600000 / 2) {
+//			h_x = [self indexOfChar:[self charAtIndex:1 ofString:code] inString:h_key] * 777600000 + 
+//					[self indexOfChar:[self charAtIndex:3 ofString:code] inString:h_key] * 12960000 +
+//					[self indexOfChar:[self charAtIndex:5 ofString:code] inString:h_key] * 216000 + 
+//					[self indexOfChar:[self charAtIndex:7 ofString:code] inString:h_key] * 3600 +
+//					[self indexOfChar:[self charAtIndex:9 ofString:code] inString:h_key] * 60 + 
+//					[self indexOfChar:[self charAtIndex:11 ofString:code] inString:h_key];
+//			h_y = [self indexOfChar:[self charAtIndex:2 ofString:code] inString:h_key] * 777600000 + 
+//					[self indexOfChar:[self charAtIndex:4 ofString:code] inString:h_key] * 12960000 +
+//					[self indexOfChar:[self charAtIndex:6 ofString:code] inString:h_key] * 216000 + 
+//					[self indexOfChar:[self charAtIndex:8 ofString:code] inString:h_key] * 3600 +
+//					[self indexOfChar:[self charAtIndex:10 ofString:code] inString:h_key] * 60 + 
+//					[self indexOfChar:[self charAtIndex:12 ofString:code] inString:h_key];
+//		} else
 		
 		
 		if (h_max >= 12960000 / 2) {

@@ -96,6 +96,7 @@
 
 
 - (void)dealloc {
+	[mapView release];
     [super dealloc];
 }
 
