@@ -7,7 +7,8 @@
 //
 
 #import "GeoHex_ObjectiveCViewController.h"
-#import "GeoHex.h"
+#import "GeoHexV2.h"
+#import "GeoHexV3.h"
 
 @implementation GeoHex_ObjectiveCViewController
 
@@ -42,7 +43,7 @@
 	CLLocationCoordinate2D c = CLLocationCoordinate2DMake(33.80911,-117.92107);
 	[mapView setCenterCoordinate:c];
 
-	GeoHex *geoHex = [[GeoHex alloc] initFromCode:@"pcjMgNK"];
+	GeoHexV2 *geoHex = [[GeoHexV2 alloc] initFromCode:@"pcjMgNK"];
 	
 	CLLocationCoordinate2D coordinates[6];
 	NSArray *locations = [geoHex locations];
@@ -62,6 +63,28 @@
 	[mapView addOverlay:polygon];
 	
 	[geoHex release];
+    
+    GeoHexV3 *geoHex3 = [[GeoHexV3 alloc] initFromCode:@"RU00667382"];
+    
+    CLLocationCoordinate2D coordinates3[6];
+	NSArray *locations3 = [geoHex3 locations];
+	i = 0;
+	
+	for (CLLocation *location3 in locations3) {
+		coordinates3[i] = location3.coordinate;
+		
+		i++;
+		
+		if (i >= 6) {
+			break;
+		}
+	}
+	
+	MKPolygon *polygon3 = [MKPolygon polygonWithCoordinates:coordinates3 count:6];
+	[mapView addOverlay:polygon3];
+	
+	[geoHex3 release];
+
 }
 
 #pragma mark MKMapViewDelegate methods

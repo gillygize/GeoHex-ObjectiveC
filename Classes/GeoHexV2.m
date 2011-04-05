@@ -6,14 +6,14 @@
 //  Copyright 2010 Tonchidot. All rights reserved.
 //
 
-#import "GeoHex.h"
+#import "GeoHexV2.h"
 
 #define h_key	@"abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 #define h_base	20037508.3
 #define h_deg	M_PI*(30.0/180.0)
 #define h_k		tan(h_deg)
 
-@interface GeoHex ()
+@interface GeoHexV2 ()
 
 /**
  * A utility method to return the character located at a specific index.
@@ -32,7 +32,7 @@
 -(int)indexOfChar:(NSString *) aChar inString:(NSString *) aString;
 @end
 
-@implementation GeoHex
+@implementation GeoHexV2
 
 @synthesize code;
 @synthesize coordinate;
@@ -59,7 +59,7 @@
 	return h_base/pow(2, aLevel)/3;
 }
 
-+(NSArray *)geoHexListByStepsCenteredAroundGeoHex:(GeoHex *) centralGeoHex withLayers: (int) numberOfLayers {
++(NSArray *)geoHexListByStepsCenteredAroundGeoHex:(GeoHexV2 *) centralGeoHex withLayers: (int) numberOfLayers {
 //TODO: What if the user specifies more layers than it possible at the given level? (eg. requesting
 // 10 layers of GeoHexes at Level 0)  There is current behavior is undefined.
 	
@@ -78,27 +78,27 @@
             if (i > 0 || j > 0) {
 				if (i >= j) {
 					mapPoint = MKMapPointMake(centerPoint.x + i, centerPoint.y + j);
-					[[list objectAtIndex:i] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
+					[[list objectAtIndex:i] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
 					
 				} else {
 					mapPoint = MKMapPointMake(centerPoint.x + i, centerPoint.y + j);
-					[[list objectAtIndex:j] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
+					[[list objectAtIndex:j] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
 				}
 				
 				if (i >= j) {
 					mapPoint = MKMapPointMake(centerPoint.x - i, centerPoint.y - j);
-					[[list objectAtIndex:i] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
+					[[list objectAtIndex:i] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
 				} else {
 					mapPoint = MKMapPointMake(centerPoint.x - i, centerPoint.y - j);
-					[[list objectAtIndex:j] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
+					[[list objectAtIndex:j] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
 				}
 				
 				if (i > 0 && j > 0 && (i + j <= numberOfLayers - 1)) {
 					mapPoint = MKMapPointMake(centerPoint.x - i, centerPoint.y + j);
-					[[list objectAtIndex:i+j] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
+					[[list objectAtIndex:i+j] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];
 					
 					mapPoint = MKMapPointMake(centerPoint.x + i, centerPoint.y - j);
-					[[list objectAtIndex:i+j] addObject:[[[GeoHex alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];			
+					[[list objectAtIndex:i+j] addObject:[[[GeoHexV2 alloc] initFromPoint:mapPoint withLevel:centralGeoHex.level] autorelease]];			
 				}
             }
 		}
@@ -109,8 +109,8 @@
 
 +(NSArray *)geoHexListByCoordinatePathFrom: (CLLocationCoordinate2D) startCoordinate to:(CLLocationCoordinate2D) endCoordinate atLevel:(int)aLevel {
 	//TODO: Investigate if we can condense the code with a call to stepsFrom:to:
-	GeoHex *zone0 = [[GeoHex alloc] initFromLocation:startCoordinate withLevel:aLevel];
-	GeoHex *zone1 = [[GeoHex alloc] initFromLocation:endCoordinate withLevel:aLevel];
+	GeoHexV2 *zone0 = [[[GeoHexV2 alloc] initFromLocation:startCoordinate withLevel:aLevel] autorelease];
+	GeoHexV2 *zone1 = [[[GeoHexV2 alloc] initFromLocation:endCoordinate withLevel:aLevel] autorelease];
 		
 	int startx = zone0.position.x;
 	int starty = zone0.position.y;
@@ -146,17 +146,17 @@
 	
 	int steps = xabs + yabs - mabs + 1;
 	
-	MKMapPoint start_xy = [GeoHex pointFromLocation:startCoordinate];
+	MKMapPoint start_xy = [GeoHexV2 pointFromLocation:startCoordinate];
 	
 	int start_x = floor(start_xy.x);
 	int start_y = floor(start_xy.y);
 	
-	MKMapPoint end_xy = [GeoHex pointFromLocation:endCoordinate];
+	MKMapPoint end_xy = [GeoHexV2 pointFromLocation:endCoordinate];
 
 	int end_x = floor(end_xy.x);
 	int end_y = floor(end_xy.y);
 	
-	double h_size = [GeoHex hexSizeForLevel:aLevel];
+	double h_size = [GeoHexV2 hexSizeForLevel:aLevel];
 	
 	double unit_x = 6 * h_size;
 	double unit_y = 6 * h_size * h_k;
@@ -189,7 +189,7 @@
 		}
 	    if(pre_x!=h_x||pre_y!=h_y){
 			cnt++;
-			[list addObject:[[[GeoHex alloc] initFromPoint:MKMapPointMake(h_x, h_y) withLevel:aLevel] autorelease]];			
+			[list addObject:[[[GeoHexV2 alloc] initFromPoint:MKMapPointMake(h_x, h_y) withLevel:aLevel] autorelease]];			
 	    }
 	    pre_x = h_x;
 	    pre_y = h_y;    
@@ -198,7 +198,7 @@
 	return list;
 }
 
-+(int)stepsFrom:(GeoHex *) startGeoHex to:(GeoHex *) endGeoHex {
++(int)stepsFrom:(GeoHexV2 *) startGeoHex to:(GeoHexV2 *) endGeoHex {
 	int x = floor(endGeoHex.position.x - startGeoHex.position.x);
 	int y = floor(endGeoHex.position.y - startGeoHex.position.y);
 	
@@ -237,9 +237,9 @@
 -(id)initFromLocation:(CLLocationCoordinate2D) aLocation withLevel:(int)aLevel
 {
 	if ((self = [super init])) {
-		double h_size = [GeoHex hexSizeForLevel:aLevel];
+		double h_size = [GeoHexV2 hexSizeForLevel:aLevel];
 		
-		MKMapPoint z_xy = [GeoHex pointFromLocation:aLocation];
+		MKMapPoint z_xy = [GeoHexV2 pointFromLocation:aLocation];
 		
 		double lon_grid = z_xy.x;
 		double lat_grid = z_xy.y;
@@ -276,7 +276,7 @@
 		double h_lon = (h_lat - h_y*unit_y)/h_k;
 		
 		MKMapPoint xyloc = MKMapPointMake(h_lon, h_lat);
-		CLLocationCoordinate2D z_loc = [GeoHex locationFromPoint:xyloc];
+		CLLocationCoordinate2D z_loc = [GeoHexV2 locationFromPoint:xyloc];
 		
 		double z_loc_x = z_loc.longitude;
 		
@@ -353,7 +353,7 @@
 -(id) initFromCode:(NSString *)aCode {
 	if ((self = [super init])) {	
 		int level = [self indexOfChar:[self charAtIndex:0 ofString:aCode] inString:h_key];
-		double h_size = [GeoHex hexSizeForLevel:level];
+		double h_size = [GeoHexV2 hexSizeForLevel:level];
 		double unit_x = 6 * h_size;
 		double unit_y = 6 * h_size * h_k;
 		double h_max = round(h_base / unit_x + h_base / unit_y);
@@ -419,7 +419,7 @@
 		double h_lat_y = (h_k * h_x * unit_x + h_y * unit_y) / 2;
 		double h_lon_x = (h_lat_y - h_y * unit_y) / h_k;
 		
-		CLLocationCoordinate2D h_loc = [GeoHex locationFromPoint:MKMapPointMake(h_lon_x, h_lat_y)];
+		CLLocationCoordinate2D h_loc = [GeoHexV2 locationFromPoint:MKMapPointMake(h_lon_x, h_lat_y)];
 		
 		code = [aCode copy];
 		coordinate = h_loc;
@@ -431,14 +431,14 @@
 
 -(id)initFromPoint:(MKMapPoint) aPoint withLevel:(int)aLevel {
 	if ((self = [super init])) {
-		double h_size = [GeoHex hexSizeForLevel:aLevel];
+		double h_size = [GeoHexV2 hexSizeForLevel:aLevel];
 		double unit_x = 6 * h_size;
 		double unit_y = 6 * h_size * h_k;
 		double h_max = round(h_base / unit_x + h_base / unit_y);
 		double h_lat_y = (h_k * aPoint.x * unit_x + aPoint.y * unit_y) / 2;
 		double h_lon_x = (h_lat_y - aPoint.y * unit_y) / h_k;
 		
-		CLLocationCoordinate2D h_loc = [GeoHex locationFromPoint:MKMapPointMake(h_lon_x, h_lat_y)];
+		CLLocationCoordinate2D h_loc = [GeoHexV2 locationFromPoint:MKMapPointMake(h_lon_x, h_lat_y)];
 		
 		int x_p = 0;
 		int y_p = 0;
@@ -503,14 +503,14 @@
 }
 
 -(double) hexSize {
-	return [GeoHex hexSizeForLevel:[self level]];
+	return [GeoHexV2 hexSizeForLevel:[self level]];
 }
 
 -(NSArray *)locations
 {	
 	double h_lat = self.coordinate.latitude;
 	
-	MKMapPoint h_xy = [GeoHex pointFromLocation: self.coordinate];
+	MKMapPoint h_xy = [GeoHexV2 pointFromLocation: self.coordinate];
 	
 	double h_x = h_xy.x;
 	double h_y = h_xy.y;
@@ -518,13 +518,13 @@
 	double h_angle = tan(M_PI*(60.0/180.0));
 	double h_size = [self hexSize];
 	
-	double h_top = [GeoHex locationFromPoint:MKMapPointMake(h_x, (h_y + h_angle* h_size) )].latitude;
-	double h_btm = [GeoHex locationFromPoint:MKMapPointMake(h_x, (h_y - h_angle* h_size) )].latitude;
+	double h_top = [GeoHexV2 locationFromPoint:MKMapPointMake(h_x, (h_y + h_angle* h_size) )].latitude;
+	double h_btm = [GeoHexV2 locationFromPoint:MKMapPointMake(h_x, (h_y - h_angle* h_size) )].latitude;
 	
-	double h_l = [GeoHex locationFromPoint:MKMapPointMake( (h_x - 2* h_size), h_y)].longitude;
-	double h_r = [GeoHex locationFromPoint:MKMapPointMake( (h_x + 2* h_size), h_y)].longitude;
-	double h_cl = [GeoHex locationFromPoint:MKMapPointMake( (h_x - 1* h_size), h_y)].longitude;
-	double h_cr = [GeoHex locationFromPoint:MKMapPointMake( (h_x + 1* h_size), h_y)].longitude;
+	double h_l = [GeoHexV2 locationFromPoint:MKMapPointMake( (h_x - 2* h_size), h_y)].longitude;
+	double h_r = [GeoHexV2 locationFromPoint:MKMapPointMake( (h_x + 2* h_size), h_y)].longitude;
+	double h_cl = [GeoHexV2 locationFromPoint:MKMapPointMake( (h_x - 1* h_size), h_y)].longitude;
+	double h_cr = [GeoHexV2 locationFromPoint:MKMapPointMake( (h_x + 1* h_size), h_y)].longitude;
 	
 	NSArray *locations = [NSArray arrayWithObjects:
 						  [[[CLLocation alloc] initWithLatitude:h_lat longitude:h_l] autorelease],
