@@ -298,28 +298,28 @@
 		int h_y_abs = abs(h_y)*2+h_y_p;
 		
 //		double h_x_100000 = floor(h_x_abs/777600000);
-		double h_x_10000 = floor((h_x_abs%77600000)/1296000);
-		double h_x_1000 = floor((h_x_abs%1296000)/216000);
+		double h_x_10000 = floor((h_x_abs%777600000)/12960000);
+		double h_x_1000 = floor((h_x_abs%12960000)/216000);
 		double h_x_100 = floor((h_x_abs%216000)/3600);
 		double h_x_10 = floor((h_x_abs%3600)/60);
 		double h_x_1 = floor((h_x_abs%3600)%60);
 		
 //		double h_y_100000 = floor(h_y_abs/777600000);
-		double h_y_10000 = floor((h_y_abs%77600000)/1296000);
-		double h_y_1000 = floor((h_y_abs%1296000)/216000);
+		double h_y_10000 = floor((h_y_abs%777600000)/12960000);
+		double h_y_1000 = floor((h_y_abs%12960000)/216000);
 		double h_y_100 = floor((h_y_abs%216000)/3600);
 		double h_y_10 = floor((h_y_abs%3600)/60);
 		double h_y_1 = floor((h_y_abs%3600)%60);
 		
-		NSMutableString *h_code = [NSMutableString stringWithCapacity:10];
+		NSMutableString *h_code = [NSMutableString string];
 		[h_code	appendString:[self charAtIndex:aLevel%60 ofString:h_key]];
 		
-//		if (h_max >=77600000 / 2) {
+//		if (h_max >=777600000 / 2) {
 //			[h_code appendString:[self charAtIndex:(h_x_100000) ofString:h_key]];
 //			[h_code appendString:[self charAtIndex:(h_y_100000) ofString:h_key]];
 //		}
 		
-		if (h_max >= 1296000/2) {
+		if (h_max >= 12960000/2) {
 			[h_code appendString:[self charAtIndex:(h_x_10000) ofString:h_key]];
 			[h_code appendString:[self charAtIndex:(h_y_10000) ofString:h_key]];
 		}
