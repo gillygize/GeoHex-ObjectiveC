@@ -165,8 +165,12 @@
         
         if(h_loc.longitude>180){
             h_loc.longitude -= 360;
+            h_x -= pow(3,level);
+            h_y += pow(3,level);
         } else if(h_loc.longitude < -180) { 
             h_loc.longitude += 360;
+            h_x += pow(3,level);
+            h_y -= pow(3,level);
         }
         
         code = aCode;
