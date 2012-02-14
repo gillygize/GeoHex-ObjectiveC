@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MKMapView.h>
 
-#define kGeoHexV3Version			@"3.0.0"
+#define kGeoHexV3Version			@"3.01"
 #define kGeoHexV3NumberOfLevels     15
 
 /*!
