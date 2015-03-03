@@ -65,6 +65,7 @@
  * @return	The number of steps from the first GeoHex to the second GeoHex, including both GeoHexes
  */
 -(id)initFromLocation:(CLLocationCoordinate2D) aLocation withLevel:(int)aLevel;
+-(id)initWithLocation:(CLLocationCoordinate2D) aLocation withLevel:(int)aLevel;
 
 /*!
  * Creates a new GeoHex from a GeoHex encoding.
@@ -72,6 +73,7 @@
  * @return	The GeoHex object represented by the given encoding.
  */
 -(id)initFromCode:(NSString *)aCode;
+-(id)initWithCode:(NSString *)aCode;
 /*!
  * The level of the current GeoHex. The level is part of the GeoHex definition and ranges from 0 to kGeoHexNumberOfLevels
  * where 0 is a GeoHex of the large area and each subsequent level becomes smaller.
