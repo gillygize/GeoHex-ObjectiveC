@@ -181,6 +181,10 @@
 	return self;
 }
 
+-(id) initWithCode:(NSString *)aCode {
+  return [self initFromCode:aCode];
+}
+
 -(id)initFromLocation:(CLLocationCoordinate2D) aLocation withLevel:(int)aLevel {
 	if ((self = [super init])) {
         int level = aLevel + 2;
@@ -279,6 +283,10 @@
 	}
 	
 	return self;
+}
+
+-(id)initWithLocation:(CLLocationCoordinate2D) aLocation withLevel:(int)aLevel {
+  return [self initFromLocation:aLocation withLevel:aLevel];
 }
 
 -(int)level {
