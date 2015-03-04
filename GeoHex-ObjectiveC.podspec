@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   # NOTE: GeoHex Spec is MIT License. What is this code's license?
   s.license      = { :type => "MIT" }
 
-  s.author       = { "gillygize" => "me@mattgillingham.com" }
+  s.author       = { "Matthew Gillingham" => "me@mattgillingham.com" }
 
   s.source       = { :git => "git@github.com:gillygize/GeoHex-ObjectiveC.git", :tag => "0.0.1" }
 
