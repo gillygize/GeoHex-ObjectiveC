@@ -23,7 +23,7 @@
 	MKMapPoint position;				
 }
 
-@property(nonatomic, retain, readonly) NSString *code;	/*!< The encoded string for this GeoHex. */
+@property(nonatomic, copy, readonly) NSString *code;	/*!< The encoded string for this GeoHex. */
 @property(readonly) CLLocationCoordinate2D coordinate;	/*!< The coordinate of the GeoHex. */
 @property(readonly) MKMapPoint position;				/*!< The X, Y position of the GeoHex, using the GeoHex specific coordinate system */
 

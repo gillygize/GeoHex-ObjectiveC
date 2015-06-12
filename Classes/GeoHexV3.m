@@ -173,7 +173,7 @@
             h_y -= pow(3,level);
         }
         
-        code = aCode;
+        code = [aCode copy];
         coordinate = h_loc;
         position = MKMapPointMake(h_x, h_y);
 	}
