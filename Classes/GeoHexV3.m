@@ -230,7 +230,7 @@
             h_y = h_xy;
         }
         
-        NSMutableString *h_code = [NSMutableString string];
+        NSMutableString *h_code = [NSMutableString stringWithCapacity:level+3];
         int code3_x[level+1];
         int code3_y[level+1];
         double mod_x = h_x;
