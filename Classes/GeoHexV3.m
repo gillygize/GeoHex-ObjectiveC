@@ -230,11 +230,9 @@
             h_y = h_xy;
         }
         
-        NSMutableString *h_code = [NSMutableString string];
+        NSMutableString *h_code = [NSMutableString stringWithCapacity:level+3];
         int code3_x[level+1];
         int code3_y[level+1];
-        NSMutableString *code3 = [NSMutableString string];
-        NSMutableString *code9=  [NSMutableString string];
         double mod_x = h_x;
         double mod_y = h_y;
         int i;
@@ -263,11 +261,7 @@
         }
         
         for(i=0;i<=level;i++){
-            [code3 appendFormat:@"%d%d", code3_x[i], code3_y[i]];
-            [code9 appendString:[self parseInt3:code3]];
-            [h_code appendString:code9];
-            [code9 deleteCharactersInRange:NSMakeRange(0, [code9 length])];
-            [code3 deleteCharactersInRange:NSMakeRange(0, [code3 length])];
+            [h_code appendString:[GeoHexV3 parseInt3x:code3_x[i] y:code3_y[i]]];
         }
 
         NSString* h_2 = [h_code substringFromIndex:3];
@@ -356,17 +350,34 @@
 	return range.location;
 }
 
-- (NSString*)parseInt3:(NSString*)codeStr {
-    int length = [codeStr length];
-    int multiplier = length - 1;
-    int result = 0;
-    
-    for(int i=0; i < length; i++, multiplier--) {
-        NSString *place = [codeStr substringWithRange:NSMakeRange(i, 1)];
-        result += [place integerValue] * pow(3, multiplier); 
++(NSString*)parseInt3x:(int)x y:(int)y {
+    //base 3 to base 10 conversion. X is the first digit in the base 3 number, Y is the second. In this use case, X and Y will always be 0-2 so it is faster to hard code the values than to do an expensive conversion.
+    if (x == 0) {
+        if (y == 0) {
+            return @"0";
+        } else if (y == 1) {
+            return @"1";
+        } else if (y == 2) {
+            return @"2";
+        }
+    } else if (x == 1) {
+        if (y == 0) {
+            return @"3";
+        } else if (y == 1) {
+            return @"4";
+        } else if (y == 2) {
+            return @"5";
+        }
+    } else if (x == 2) {
+        if (y == 0) {
+            return @"6";
+        } else if (y == 1) {
+            return @"7";
+        } else if (y == 2) {
+            return @"8";
+        }
     }
-    
-    return [NSString stringWithFormat:@"%d", result];
+    return nil;
 }
 
 -(NSString*)toString3:(int)anInteger {
